@@ -1,6 +1,6 @@
 # ServerBasics für Paper 26.3 / Java 25
 
-Datei: `ServerBasics-1.0.4-paper-26.3.jar`
+Datei: `ServerBasics-1.0.5-paper-26.3.jar`
 
 Die JAR in `plugins/` kopieren und den Server vollständig neu starten.
 Alle drei Befehle sind standardmäßig für alle Spieler freigegeben:
@@ -85,3 +85,12 @@ Build und JAR geprüft. Cooldown-Komponente mit kontrollierter Uhr geprüft:
 Spielerunabhängigkeit, 10-Minuten-Grenze, Restzeitrundung, Wiederherstellung
 nach erneuter Dateiladung, Ersetzung/Entfernung abgelaufener Einträge und
 Ablehnung beschädigter Daten. Noch kein vollständiger Live-Test im Spiel.
+
+## Version 1.0.5
+
+Neue erfolgreiche `/spawn`-Teleports starten jetzt 30 Minuten Cooldown.
+Gespeicherte laufende Cooldowns behalten ihre bisherige Ablaufzeit.
+Restzeitanzeige, Speicherung über Neustarts und alle bisherigen Funktionen
+bleiben erhalten. Build und Prüfungen der Cooldown-Komponente für 30 Minuten,
+Spielerunabhängigkeit, Ablaufgrenze und Dateiwiederherstellung erfolgreich.
+Noch kein Live-Test im Spiel.
