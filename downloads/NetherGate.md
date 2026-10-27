@@ -1,38 +1,73 @@
-# NetherGate — Paper 26.3 / Java 25
+# NetherGate 1.1.0 — Paper 26.3 / Java 25
 
-Separates Plugin: `NetherGate-1.0.0-paper-26.3.jar`.
-JAR in `plugins/` kopieren und den Server vollständig neu starten.
-ServerBasics muss dafür nicht ersetzt werden.
+Separates Plugin: `NetherGate-1.1.0-paper-26.3.jar`.
+Server stoppen, alte NetherGate-JAR entfernen, neue JAR in `plugins/` kopieren
+und Server vollständig neu starten. ServerBasics muss nicht ersetzt werden.
 
-Der Nether ist bei der ersten Installation für alle Spieler gesperrt, auch
-für Admins. `/nether 123` gibt ihn für alle dauerhaft frei. Dafür ist OP
-oder die Berechtigung `nethergate.unlock` erforderlich (Standard: op).
-Nur die Zahlenfolge zu kennen reicht ohne Berechtigung nicht aus.
-Die Konsole kann den Befehl ebenfalls ausführen.
+## Admin-Countdown
 
-Alle Netherwelten werden über ihren Dimensionstyp erkannt; der Weltname
-spielt keine Rolle. Netherportale und Spielerteleports (einschließlich
-Plugin-/Befehlsteleports) werden bis zur Freigabe abgebrochen. Overworld
-und End bleiben zugänglich. Bereits im Nether befindliche Spieler werden
-bei Pluginstart sowie beim Einloggen zum Spawn der ersten geladenen
+Bei der ersten Installation ist der Nether für alle gesperrt.
+`/nether 123` startet einen 30-Minuten-Countdown; dafür ist OP oder die
+Berechtigung `nethergate.unlock` erforderlich (Standard: op).
+Die Konsole kann den Befehl ebenfalls verwenden. Den Code allein zu kennen
+reicht ohne Berechtigung nicht aus. Erneutes Eingeben setzt einen laufenden
+Countdown nicht zurück. Ein falscher Code verändert nichts.
+
+Alle aktuell verbundenen Spieler sehen den Titel `Nether in 30min.` für
+3 Sekunden ohne Ein-/Ausblendzeit. Farben: Lavaorange (#FF6A00),
+Netherrackrot (#A8463B), Glutgelb (#FFD54A), fette Titelschrift.
+Nach dem Titel erscheint oben eine rote Bossleiste mit 20 Abschnitten,
+orange-gelber Restzeitanzeige und abnehmender Füllung. Der Countdown läuft
+ab dem Adminbefehl, die 3 Titelsekunden sind darin enthalten.
+Später beitretende Spieler erhalten die noch laufende Bossleiste.
+Nach 30 Minuten wird der Nether automatisch für alle freigegeben; die
+Bossleiste verschwindet und der Titel `NETHER IST OFFEN!` erscheint 3 Sekunden.
+Es gibt keine Leiste unten links, keinen Client-Mod und kein Ressourcenpaket.
+
+Ein einzelner Scheduler-Task aktualisiert den Timer einmal pro Sekunde,
+ausschließlich solange der Countdown läuft. Es werden keine Chatzeilen
+pro Sekunde gesendet und keine Zustandsdateien pro Sekunde geschrieben.
+
+## Neustarts und vorhandene Installation
+
+`plugins/NetherGate/config.yml` enthält:
+
+```yaml
+nether-unlocked: false
+nether-opens-at: 0
+```
+
+Der Start speichert den absoluten Öffnungszeitpunkt in Millisekunden.
+Neustarts setzen den Countdown nicht zurück, Offlinezeit zählt mit.
+Nach Ablauf während eines Serverstopps erfolgt die Freigabe beim nächsten
+Start. Der Zustand wird vor Bestätigung gespeichert; bei einem Speicherfehler
+bleibt der Nether gesperrt. Nach der Freigabe steht `nether-unlocked: true`.
+
+**Eine bereits gespeicherte Freigabe aus Version 1.0.0 bleibt bestehen.**
+Um einen neuen Countdown vorzubereiten: Server stoppen und in dieser Datei
+`nether-unlocked: false` sowie `nether-opens-at: 0` setzen, dann starten.
+Ein bereits offener Nether wird nicht durch einen erneuten Befehl gesperrt.
+
+## Sperre
+
+Netherwelten werden anhand ihres Dimensionstyps erkannt, unabhängig vom Namen.
+Netherportale und Spielerteleports werden bis zur Freigabe abgebrochen.
+Overworld und End bleiben zugänglich. Bereits im Nether befindliche Spieler
+werden bei Pluginstart sowie beim Einloggen zum Spawn der ersten geladenen
 Overworld zurückgebracht. Loginpositionen und Respawnziele im gesperrten
 Nether werden umgeleitet. Ist keine Overworld verfügbar oder eine nötige
-Rückkehr blockiert, wird der betroffene Spieler getrennt, damit er nicht
-im gesperrten Nether bleibt. Keine regelmäßige Prüfschleife.
+Rückkehr blockiert, wird der betroffene Spieler getrennt. Keine Adminumgehung.
+Portale und Weltdaten werden nicht zerstört.
 
-Die Freigabe wird vor ihrer Bestätigung in
-`plugins/NetherGate/config.yml` unter `nether-unlocked: true` gespeichert
-und bleibt bei Neustarts erhalten. Ein falscher Code ändert nichts.
-Erneutes manuelles Sperren ist bei gestopptem Server möglich, indem man
-dort `nether-unlocked: false` setzt und den Server wieder startet.
-Das Plugin zerstört keine Portale und verändert keine Weltdaten.
+## Validierung
 
-Build gegen Paper API 26.3.build.224-stable erfolgreich. Separater Testlauf
-mit echten Paper-Ereignisobjekten und simulierten Spielern/Welten prüfte:
-alle Teleportursachen, Portalblockierung, Overworld-/End-Zugriff,
-Berechtigungsprüfung, falschen Code, Login-/Respawn-Umleitung,
-Speicherung der Admin-Freigabe und anschließenden Zutritt. JAR-Struktur
-geprüft. Kein vollständiger Live-Test auf einem Minecraft-Server.
-Andere Plugins, die nachträglich Ereignisse umschreiben/Entsperrungen
-überschreiben oder Weltwechsel ohne Bukkit-Ereignisse durchführen, müssen
-separat auf Kompatibilität geprüft werden.
+Maven-Build und JAR-Prüfung erfolgreich. Separater Test mit echten Paper-
+Ereignisobjekten, simulierter Uhr, Scheduler, Spielern und Welten prüfte:
+Adminrechte und falschen Code, exakt 3 Sekunden Titeldauer, Bossleiste erst
+danach, roten Balken und halbe Füllung nach 15 Minuten, mehrfachen Befehl,
+gespeicherten Öffnungszeitpunkt und Restzeit nach Wiederherstellung,
+Portalblockierung bis unmittelbar vor 30 Minuten, automatische Freigabe,
+Entfernung der Bossleiste und Beendigung des Scheduler-Tasks.
+Kein vollständiger Live-Test auf einem Minecraft-Server und kein visueller
+Test im Client. Andere Plugins, die Ereignisse nachträglich überschreiben
+oder Weltwechsel ohne Bukkit-Ereignisse ausführen, separat prüfen.
