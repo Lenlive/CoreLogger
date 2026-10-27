@@ -1,6 +1,6 @@
 # ServerBasics für Paper 26.3 / Java 25
 
-Datei: `ServerBasics-1.0.0-paper-26.3.jar`
+Datei: `ServerBasics-1.0.1-paper-26.3.jar`
 
 Die JAR in `plugins/` kopieren und den Server vollständig neu starten.
 Alle drei Befehle sind standardmäßig für alle Spieler freigegeben:
@@ -29,3 +29,12 @@ Validierung: Maven-Build gegen Paper API 26.3.build.224-stable erfolgreich;
 JAR-Struktur, API-Deklaration, Java-25-Bytecode und Standardberechtigungen geprüft.
 Noch kein Live-Test auf einem Minecraft-Server: Der Serverdownload ist im
 Cloud-Netzwerk gesperrt. Keine Aussage über gemessene TPS oder Lasttests.
+
+## Version 1.0.1
+
+Sitzhöhe korrigiert: Der Marker-Sitz liegt jetzt 0,15 Blöcke über der
+ursprünglichen Fußposition statt 1,7 Blöcke darunter. Vor dem Hinsetzen
+wird freier Platz für die Spielerhöhe geprüft. Bei Kollision wird der
+Befehl abgebrochen. Kein zusätzlicher periodischer Task.
+Build und JAR-Prüfung erfolgreich, noch kein Live-Test im Spiel.
+Die alte Version 1.0.0 wegen dieses Fehlers nicht mehr verwenden.
