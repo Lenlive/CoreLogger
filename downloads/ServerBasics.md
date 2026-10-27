@@ -1,6 +1,6 @@
 # ServerBasics für Paper 26.3 / Java 25
 
-Datei: `ServerBasics-1.0.1-paper-26.3.jar`
+Datei: `ServerBasics-1.0.2-paper-26.3.jar`
 
 Die JAR in `plugins/` kopieren und den Server vollständig neu starten.
 Alle drei Befehle sind standardmäßig für alle Spieler freigegeben:
@@ -38,3 +38,13 @@ wird freier Platz für die Spielerhöhe geprüft. Bei Kollision wird der
 Befehl abgebrochen. Kein zusätzlicher periodischer Task.
 Build und JAR-Prüfung erfolgreich, noch kein Live-Test im Spiel.
 Die alte Version 1.0.0 wegen dieses Fehlers nicht mehr verwenden.
+
+## Version 1.0.2
+
+`/spawn` funktioniert ausschließlich, wenn der ausführende Spieler in einer
+Overworld (Bukkit Environment.NORMAL) ist. Im Nether, End oder benutzerdefinierten
+anderen Dimensionstypen wird der Befehl mit einer Meldung abgelehnt. Auch die
+konfigurierte Zielwelt muss eine Overworld sein. `/spwn` ist ein Alias für
+`/spawn` mit denselben Einschränkungen. Alle drei Befehle bleiben standardmäßig
+für alle Spieler freigegeben. Die Sitzhöhenkorrektur aus 1.0.1 ist enthalten.
+Maven-Build und JAR-Prüfung erfolgreich; noch kein Live-Test im Spiel.
