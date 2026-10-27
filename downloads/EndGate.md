@@ -1,6 +1,6 @@
-# EndGate 1.0.0 — Paper 26.3 / Java 25
+# EndGate 1.0.1 — Paper 26.3 / Java 25
 
-Separates Plugin: `EndGate-1.0.0-paper-26.3.jar`.
+Separates Plugin: `EndGate-1.0.1-paper-26.3.jar`.
 JAR in `plugins/` kopieren und den Server vollständig neu starten.
 NetherGate und ServerBasics werden nicht ersetzt und bleiben unabhängig.
 
@@ -65,3 +65,15 @@ violette Bossleiste und halbe Füllung in beiden Phasen, gespeicherte Termine,
 Wiederherstellung der Restzeit, automatische Freigabe erst ab Minute 75,
 Entfernung des Timers sowie adminpflichtigen, persistierten Abbruch in beiden
 Phasen. Kein vollständiger Live-Test auf einem Minecraft-Server.
+
+## Version 1.0.1: kleinere Bildschirmtexte
+
+Alle drei Phasenmeldungen werden nun in der kleineren Vanilla-Untertitelzeile
+statt im großen Titel angezeigt (halbe Skalierung). Der Wortlaut der
+Hauptmeldungen, End-Farben und 3-Sekunden-Dauer bleiben erhalten. Zusätzliche
+zuvor darunter angezeigte Erklärungstexte entfallen in der Bildschirmmitte.
+Bossleiste, 60+15-Minuten-Zeitplan, Berechtigungen, gespeicherte Zeitpunkte
+und Abbruch bleiben erhalten. Bestehende Konfiguration nicht löschen.
+
+Build, kleinere Untertitel in allen Phasen und bestehende Timer-/Abbruchprüfungen
+erfolgreich. Kein vollständiger visueller Live-Test im Minecraft-Client.
