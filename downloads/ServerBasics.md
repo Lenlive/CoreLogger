@@ -44,7 +44,7 @@ Die alte Version 1.0.0 wegen dieses Fehlers nicht mehr verwenden.
 `/spawn` funktioniert ausschließlich, wenn der ausführende Spieler in einer
 Overworld (Bukkit Environment.NORMAL) ist. Im Nether, End oder benutzerdefinierten
 anderen Dimensionstypen wird der Befehl mit einer Meldung abgelehnt. Auch die
-konfigurierte Zielwelt muss eine Overworld sein. `/spwn` ist ein Alias für
-`/spawn` mit denselben Einschränkungen. Alle drei Befehle bleiben standardmäßig
+konfigurierte Zielwelt muss eine Overworld sein. Es gibt ausschließlich
+`/spawn`, keinen Alias. Alle drei Befehle bleiben standardmäßig
 für alle Spieler freigegeben. Die Sitzhöhenkorrektur aus 1.0.1 ist enthalten.
 Maven-Build und JAR-Prüfung erfolgreich; noch kein Live-Test im Spiel.
