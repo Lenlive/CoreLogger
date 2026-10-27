@@ -1,6 +1,6 @@
-# NetherGate 1.1.0 — Paper 26.3 / Java 25
+# NetherGate 1.1.1 — Paper 26.3 / Java 25
 
-Separates Plugin: `NetherGate-1.1.0-paper-26.3.jar`.
+Separates Plugin: `NetherGate-1.1.1-paper-26.3.jar`.
 Server stoppen, alte NetherGate-JAR entfernen, neue JAR in `plugins/` kopieren
 und Server vollständig neu starten. ServerBasics muss nicht ersetzt werden.
 
@@ -71,3 +71,21 @@ Entfernung der Bossleiste und Beendigung des Scheduler-Tasks.
 Kein vollständiger Live-Test auf einem Minecraft-Server und kein visueller
 Test im Client. Andere Plugins, die Ereignisse nachträglich überschreiben
 oder Weltwechsel ohne Bukkit-Ereignisse ausführen, separat prüfen.
+
+## Countdown abbrechen (1.1.1)
+
+`/nether abbruch` beendet einen laufenden Countdown. Erfordert ebenfalls OP
+oder `nethergate.unlock`. Die Bossleiste wird für alle entfernt, ein noch
+sichtbarer Starttitel gelöscht und der Timer-Task beendet. Der Nether bleibt
+gesperrt. Das gilt auch nach Neustarts, da die gespeicherte Öffnungszeit auf
+0 gesetzt wird. Bei einem Speicherfehler bleibt der Countdown aktiv und der
+Admin erhält eine Fehlermeldung. Mit `/nether 123` kann danach ein neuer
+30-Minuten-Countdown gestartet werden. Abbruch ohne laufenden Countdown
+ändert nichts; ein bereits offener Nether wird dadurch nicht erneut gesperrt.
+
+Zusätzlich geprüft mit simuliertem Scheduler/Spielern und echter Paper-API:
+Abbruch ohne Adminrechte abgelehnt, Bossleiste und Timer entfernt, Sperre
+bleibt nach ursprünglicher Ablaufzeit bestehen, Abbruchzustand gespeichert,
+wiederholter Abbruch ohne Effekt, neuer Countdown nach Abbruch, Abbruch
+während der Titeldauer. Bestehende Countdown-Prüfungen ebenfalls bestanden.
+Kein vollständiger Live-Test im Spiel.
