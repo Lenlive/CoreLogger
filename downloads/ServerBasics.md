@@ -54,8 +54,9 @@ Maven-Build und JAR-Prüfung erfolgreich; noch kein Live-Test im Spiel.
 `/all Admin <Text>` sendet den Text in Helllila und Fett mit Sternsymbolen.
 `/all Admin` allein sendet das Wort Admin in diesem Stil. Groß-/Kleinschreibung
 beim Schlüsselwort Admin ist egal. Normales `/all <Text>` bleibt gelb.
-Alle Spieler dürfen weiterhin beide Varianten benutzen; Admin ist hier nur
-ein Formatierungsmodus, keine Rollenprüfung. Der Absender bleibt sichtbar.
+Nur OPs oder Spieler mit `serverbasics.all.admin` dürfen Admin-Ankündigungen
+senden (Standard: op). Normales `/all` bleibt für alle Spieler verfügbar.
+Der Absender bleibt sichtbar.
 Minecraft unterstützt kein echtes Leuchten/Hintergrundlicht in Chatnachrichten.
 Kein Blinkeffekt, keine wiederholten Nachrichten und keine neuen periodischen
 Tasks. Bisherige Spawn-Einschränkung und Sitzhöhenkorrektur bleiben enthalten.
