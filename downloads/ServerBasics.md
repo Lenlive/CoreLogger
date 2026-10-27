@@ -1,6 +1,6 @@
 # ServerBasics für Paper 26.3 / Java 25
 
-Datei: `ServerBasics-1.0.2-paper-26.3.jar`
+Datei: `ServerBasics-1.0.3-paper-26.3.jar`
 
 Die JAR in `plugins/` kopieren und den Server vollständig neu starten.
 Alle drei Befehle sind standardmäßig für alle Spieler freigegeben:
@@ -48,3 +48,19 @@ konfigurierte Zielwelt muss eine Overworld sein. Es gibt ausschließlich
 `/spawn`, keinen Alias. Alle drei Befehle bleiben standardmäßig
 für alle Spieler freigegeben. Die Sitzhöhenkorrektur aus 1.0.1 ist enthalten.
 Maven-Build und JAR-Prüfung erfolgreich; noch kein Live-Test im Spiel.
+
+## Version 1.0.3
+
+`/all Admin <Text>` sendet den Text in Helllila und Fett mit Sternsymbolen.
+`/all Admin` allein sendet das Wort Admin in diesem Stil. Groß-/Kleinschreibung
+beim Schlüsselwort Admin ist egal. Normales `/all <Text>` bleibt gelb.
+Alle Spieler dürfen weiterhin beide Varianten benutzen; Admin ist hier nur
+ein Formatierungsmodus, keine Rollenprüfung. Der Absender bleibt sichtbar.
+Minecraft unterstützt kein echtes Leuchten/Hintergrundlicht in Chatnachrichten.
+Kein Blinkeffekt, keine wiederholten Nachrichten und keine neuen periodischen
+Tasks. Bisherige Spawn-Einschränkung und Sitzhöhenkorrektur bleiben enthalten.
+
+Build und JAR-Prüfung erfolgreich. Formatierung mit echter Adventure-API geprüft:
+Normaltext gelb, Admintext lila und fett, Schlüsselwort ohne Beachtung der
+Großschreibung, Admin ohne Folgetext, leere Eingabe und literale Formatierungstags.
+Kein Live-Test auf einem Minecraft-Server.
