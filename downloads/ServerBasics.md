@@ -1,6 +1,6 @@
 # ServerBasics für Paper 26.3 / Java 25
 
-Datei: `ServerBasics-1.0.3-paper-26.3.jar`
+Datei: `ServerBasics-1.0.4-paper-26.3.jar`
 
 Die JAR in `plugins/` kopieren und den Server vollständig neu starten.
 Alle drei Befehle sind standardmäßig für alle Spieler freigegeben:
@@ -65,3 +65,23 @@ Build und JAR-Prüfung erfolgreich. Formatierung mit echter Adventure-API geprü
 Normaltext gelb, Admintext lila und fett, Schlüsselwort ohne Beachtung der
 Großschreibung, Admin ohne Folgetext, leere Eingabe und literale Formatierungstags.
 Kein Live-Test auf einem Minecraft-Server.
+
+## Version 1.0.4
+
+`/spawn` hat jetzt für jeden Spieler (auch OPs) 10 Minuten Cooldown ab
+einem erfolgreichen Teleport. Fehlgeschlagene oder abgelehnte Versuche
+starten keinen Cooldown. Bei Wiederholung erscheint die verbleibende
+Wartezeit in Minuten und Sekunden. Kein neuer Alias und keine Umgehungsrechte.
+Die Overworld-Beschränkung und alle bisherigen Funktionen bleiben enthalten.
+
+Cooldowns werden unter `plugins/ServerBasics/spawn-cooldowns.properties`
+gespeichert und bleiben bei Ausloggen und Neustart erhalten. Ein einzelner
+Hintergrund-Writer ersetzt die Datei atomar (falls vom Dateisystem unterstützt);
+bei normalem Stoppen wird auf ausstehende Schreibvorgänge gewartet. Der Server-
+Hauptthread führt nach Teleports keine Dateischreibvorgänge aus. Cooldowns
+laufen auch während Offlinezeit ab.
+
+Build und JAR geprüft. Cooldown-Komponente mit kontrollierter Uhr geprüft:
+Spielerunabhängigkeit, 10-Minuten-Grenze, Restzeitrundung, Wiederherstellung
+nach erneuter Dateiladung, Ersetzung/Entfernung abgelaufener Einträge und
+Ablehnung beschädigter Daten. Noch kein vollständiger Live-Test im Spiel.
